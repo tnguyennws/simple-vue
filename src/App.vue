@@ -1,17 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-if="posts.length">
+      {{ posts }}
+    </div>
+    <div v-else>
+      Chargement des posts…
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: 'Simple Vue',
+  data() {
+    return {
+      posts: [
+        {
+          id: 1,
+          title: "Hello",
+          body: "Hello world"
+        },
+        {
+          id: 2,
+          title: "Un autre article",
+          body: "Contenu de cet article."
+        }
+      ]
+    }
   }
 }
 </script>
