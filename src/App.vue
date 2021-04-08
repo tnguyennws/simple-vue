@@ -1,11 +1,22 @@
 <template>
   <div id="app">
+
     <div v-if="posts.length">
-      {{ posts }}
+      <ul>
+        <li
+          v-for="post in posts"
+          :key="post.id"
+        >
+          <h2>{{ post.title }}</h2>
+          <p>{{ post.body }}</p>
+        </li>
+      </ul>
     </div>
+
     <div v-else>
       Chargement des posts…
     </div>
+
   </div>
 </template>
 
@@ -15,19 +26,18 @@ export default {
   name: 'Simple Vue',
   data() {
     return {
-      posts: [
-        {
-          id: 1,
-          title: "Hello",
-          body: "Hello world"
-        },
-        {
-          id: 2,
-          title: "Un autre article",
-          body: "Contenu de cet article."
-        }
-      ]
+      posts: []
     }
+  },
+  mounted(){
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => {
+      return response.json()
+    })
+    .then((result) => {
+      this.posts = result
+    })
+    .catch(error => console.error(error))  
   }
 }
 </script>
