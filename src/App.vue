@@ -1,5 +1,4 @@
 <template>
-
   <div id="app">
     <h1>Articles</h1>
     <!--
@@ -19,15 +18,12 @@
     </div>
 
     <div v-else>
-      <!-- Point sémantique HTML : Si l'on veut présenter plus de contenu que des titres, il serait pertinent d'utiliser des élementent HTML `<article>` plutôt qu'une liste. -->
       <article class="article">
-        <!-- Un composant serait bienvenue pour représenter ces extraits d'articles. S'inspirer de la pagination pour tansmettre les informations nécessaire aux propriétes de ce futur composant.
-          -->
         <li v-for="post in posts" :key="post.id">
           <a :href="post.link">
             <h2 v-html="post.title.rendered"></h2>
           </a>
-          <div v-html="post.excerpt.rendered"></div>
+          <p v-html="post.excerpt.rendered"></p>
         </li>
       </article>
     </div>
