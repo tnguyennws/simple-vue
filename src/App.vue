@@ -7,8 +7,8 @@
           v-for="post in posts"
           :key="post.id"
         >
-          <h2>{{ post.title }}</h2>
-          <p>{{ post.body }}</p>
+      <h2 v-html="post.title.rendered"></h2>
+      <p v-html="post.excerpt.rendered"></p>
         </li>
       </ul>
     </div>
@@ -30,15 +30,18 @@ export default {
     }
   },
   mounted(){
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch('https://relikto.com/wp-json/wp/v2/posts?' + new URLSearchParams({
+      context: 'view',
+      per_page: 10,
+    }))
     .then(response => {
       return response.json()
     })
-    .then((result) => {
-      this.posts = result
+    .then(json => {
+      this.posts = json
     })
     .catch(error => console.error(error))  
-  }
+    }
 }
 </script>
 
