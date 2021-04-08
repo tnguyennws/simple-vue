@@ -1,6 +1,7 @@
 <template>
+
   <div id="app">
-    <h2>Posts WP</h2>
+    <h1>Articles</h1>
     <!--
     Des propriétés de composants sont définies (`:totalPages` et `:perPage`)
     et de valeurs sont transmissent (`totalPages` et `perPage`) à ce composant.
@@ -16,25 +17,28 @@
         Chargement des posts…
       </p>
     </div>
+
     <div v-else>
       <!-- Point sémantique HTML : Si l'on veut présenter plus de contenu que des titres, il serait pertinent d'utiliser des élementent HTML `<article>` plutôt qu'une liste. -->
-      <ul class="article">
+      <article class="article">
         <!-- Un composant serait bienvenue pour représenter ces extraits d'articles. S'inspirer de la pagination pour tansmettre les informations nécessaire aux propriétes de ce futur composant.
           -->
         <li v-for="post in posts" :key="post.id">
           <a :href="post.link">
-            <h3 v-html="post.title.rendered"></h3>
+            <h2 v-html="post.title.rendered"></h2>
           </a>
           <div v-html="post.excerpt.rendered"></div>
         </li>
-      </ul>
+      </article>
     </div>
+
   </div>
 </template>
 
 <script>
 /** WP API avec pagination **/
 import Pagination from '@/components/Pagination.vue'
+//import Article from '@/components/Article.vue'
 export default {
   name: 'SimpleVuePagination',
   components: {
@@ -44,8 +48,8 @@ export default {
     return {
       posts: [],
       isLoading: true,
-      perPage: 25,
-      totalPages: 0
+      perPage: 10,
+      totalPages: 0,
     }
   },
   mounted() {
@@ -79,3 +83,32 @@ export default {
   }
 }
 </script>
+
+<style>
+
+/**
+ * Ce style peut éventuellement être placé dans le fichier
+ * de style global `assets/styles.css`
+ */
+
+#app {
+  font-family: cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #090909;
+  max-width: 35rem;
+  margin: 0 auto;
+}
+.article {
+  list-style: none;
+  padding-left: 0;
+}
+
+h1{
+  font-family: cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #19516D;
+}
+
+</style>
